@@ -1,8 +1,20 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Icon } from "../Elements/Icon";
 import Logo from "../Elements/Logo";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 
 const Navbar = () => {
+
+  const themes = [
+    { name: "theme-green", bgcolor: "bg-[#299D91]", color: "#299D91" },
+    { name: "theme-blue", bgcolor: "bg-[#1E90FF]", color: "#1E90FF" },
+    { name: "theme-purple", bgcolor: "bg-[#6A5ACD]", color: "#6A5ACD" },
+    { name: "theme-pink", bgcolor: "bg-[#DB7093]", color: "#DB7093" },
+    { name: "theme-brown", bgcolor: "bg-[#8B4513]", color: "#8B4513" },
+  ];
+  const { theme, setTheme } = useContext(ThemeContext);
+  
   const menus = [
     {
       id: "overview",
@@ -51,9 +63,19 @@ const Navbar = () => {
   return (
   <div className="bg-defaultBlack">
     <nav className="sticky top-0 text-special-bg2 sm:w-72 w-28 min-h-screen px-7 py-12 flex flex-col justify-between">
+    <div className="md:flex md:gap-2">
+      Themes
+      {themes.map((t) => (
+        <div
+          key={t.name}
+          className={`${t.bgcolor} md:w-6 h-6 rounded-md cursor-pointer mb-2`}
+          onClick={() => setTheme(t)}
+        ></div>
+      ))}
+    </div>
       <div>
         <NavLink to="/" className="flex justify-center mb-10">
-          <Logo variant="text-white text-2x1" />
+          <Logo variant="text-primary text-sm sm:text-2x1" />
         </NavLink>
         {menus.map((menu) => (
           <NavLink 
@@ -71,7 +93,7 @@ const Navbar = () => {
     </div>
     <div className="sticky bottom-12">
           <div className="flex bg-special-bg3 px-4 py-3 rounded-md hover:text-white">
-            <div className="mx-auto sm:mx-0">
+            <div className="mx-auto sm:mx-0 text-primary">
                 <Icon.Logout />
             </div>
             <div className="ms-3 hidden sm:block">Logout</div>

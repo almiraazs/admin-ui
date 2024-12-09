@@ -51,56 +51,64 @@ export const expensesBreakdown = [
     },
   ];
   
-  export const expensesStatistics = [
-    {
-      id: 1,
-      date: "2023-05-17",
-      day: "Sun",
-      amountThisWeek: 250000,
-      amountLastWeek: 50000,
-    },
-    {
-      id: 2,
-      date: "2023-05-18",
-      day: "Mon",
-      amountThisWeek: 50000,
-      amountLastWeek: 10000,
-    },
-    {
-      id: 3,
-      date: "2023-05-19",
-      day: "Tue",
-      amountThisWeek: 10000,
-      amountLastWeek: 50000,
-    },
-    {
-      id: 4,
-      date: "2023-05-20",
-      day: "Wed",
-      amountThisWeek: 50000,
-      amountLastWeek: 50000,
-    },
-    {
-      id: 5,
-      date: "2023-05-21",
-      day: "Thu",
-      amountThisWeek: 50000,
-      amountLastWeek: 10000,
-    },
-    {
-      id: 6,
-      date: "2023-05-22",
-      day: "Fri",
-      amountThisWeek: 250000,
-      amountLastWeek: 10000,
-    },
-    {
-      id: 7,
-      date: "2023-05-23",
-      day: "Sat",
-      amountThisWeek: 50000,
-      amountLastWeek: 10000,
-    },
-  ];
+  export const expensesStatistics = {
+    datakey:"date",
+    series: [
+      {datakey: "anountThisWeek", label: "This week", color: "#E8E8E8"},
+      {datakey: "anounLastWeek", label: "Last week", color: "#299D91"},
+    ],
+    data: [
+      {
+        id: 1,
+        date: "2023-05-17",
+        day: "Sun",
+        amountThisWeek: 250000,
+        amountLastWeek: 50000,
+      },
+      {
+        id: 2,
+        date: "2023-05-18",
+        day: "Mon",
+        amountThisWeek: 50000,
+        amountLastWeek: 10000,
+      },
+      {
+        id: 3,
+        date: "2023-05-19",
+        day: "Tue",
+        amountThisWeek: 10000,
+        amountLastWeek: 50000,
+      },
+      {
+        id: 4,
+        date: "2023-05-20",
+        day: "Wed",
+        amountThisWeek: 50000,
+        amountLastWeek: 50000,
+      },
+      {
+        id: 5,
+        date: "2023-05-21",
+        day: "Thu",
+        amountThisWeek: 50000,
+        amountLastWeek: 10000,
+      },
+      {
+        id: 6,
+        date: "2023-05-22",
+        day: "Fri",
+        amountThisWeek: 250000,
+        amountLastWeek: 10000,
+      },
+      {
+        id: 7,
+        date: "2023-05-23",
+        day: "Sat",
+        amountThisWeek: 50000,
+        amountLastWeek: 10000,
+      },
+    ]
+  }
+  
   
   export default expensesBreakdown;

@@ -8,6 +8,7 @@ const Expenses = () => {
       <div className="md:col-span-2 flex flex-col flex-1 ">
         <Card 
             title="Expenses Comparison" 
+            variant="md:col-span-3 text-primary"
             desc="Lorem ipsum dolor sit amet consectetur"
         />
       </div>
@@ -15,10 +16,12 @@ const Expenses = () => {
       {/*botton content start*/}
       <div className="md:grid md:grid-cols-3 md:gap-x-6">
         <Card title="Expenses Breakdown" />
-        <Card title="&nbsp;" />
         <Card 
-          title="&nbsp;" 
+          title="&nbsp;"
           desc="Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, omnis optio. Adipisci, eum ipsa eaque consequuntur dolorum recusandae, officia explicabo quos, sequi sunt corporis eos minima modi nam et id?"  
+        />
+        <Card 
+          title="&nbsp;"
         /> 
       </div>
       <div className="md:grid md:grid-cols-3 md:gap-x-6">
