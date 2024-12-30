@@ -8,10 +8,10 @@ import CustomizedSnackbars from "../Elements/SnackBar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import { NotifContext } from "../../context/notifContext";
 
 const FromSignIn = () => {
-  const [msg, setMsg] = useState("");
-  const [open, setOpen] = useState(true);
+  const { setMsg, setOpen, setIsLoading } = useContext(NotifContext);
   const { setIsLoggedIn, setName } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -25,6 +25,7 @@ const FromSignIn = () => {
   });
 
   const onFormSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await axios.post(
         "https://jwt-auth-eight-neon.vercel.app/login",
@@ -34,20 +35,20 @@ const FromSignIn = () => {
         }
       );
 
+      setIsLoading(false);
+      setOpen(true);
+      setMsg({ severity: "success", desc: "Login Success" });
+
+      setIsLoading(true);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
+
       const decoded = jwtDecode(response.data.refreshToken);
-      console.log(decoded);
-
-      localStorage.setItem("refreshToken, response.data.refreshToken");
-
-      setIsLoggedIn(true);
       setName(decoded.name);
 
       navigate("/");
-
-      //console.log(response);
-      setOpen(true);
-      setMsg({ severity: "succes", desc: "Login Succes" });
     } catch (error) {
+      setIsLoading(false);
+      
       if (error.response) {
         setOpen(true);
         setMsg({ severity: "error", desc: error.response.data.msg });
@@ -89,7 +90,9 @@ const FromSignIn = () => {
           }}
         />
         {errors?.password && (
-          <div className="text-center text-red-500">{errors.email.message}</div>
+          <div className="text-center text-red-500">
+            {errors.password.message}
+          </div>
         )}
       </div>
       <div className="mb-3">
@@ -114,7 +117,6 @@ const FromSignIn = () => {
           setOpen={setOpen}
         />
       )}
-      <div className="mt-3 text-center text-red-500">{msg}</div>
     </form>
   );
 };
