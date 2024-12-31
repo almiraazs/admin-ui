@@ -26,7 +26,6 @@ const CardGoal = () => {
         presentAmount: response.data.data[0].presentAmount,
         targetAmount: response.data.data[0].targetAmount,
       });
-      console.log(response);
     } catch (error) {
       if (error.response) {
         if (error.response.status == 401) {

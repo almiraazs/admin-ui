@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { NotifContext } from "../../context/notifContext";
 import SimpleBackdrop from "../Elements/Backdrop";
 import CustomizedSnackbars from "../Elements/SnackBar";
+import * as motion from "motion/react-client";
 
 const AuthLayout = (props) => {
   const { children, type } = props;
@@ -11,19 +12,27 @@ const AuthLayout = (props) => {
     useContext(NotifContext);
   return (
     <div className="flex justify-center min-h-screen items-center bg-special-mainBg">
+      {isLoading && (
+        <SimpleBackdrop isLoading={isLoading} setIsLoading={setIsLoading} />
+      )}
+      {msg && (
+        <CustomizedSnackbars
+          severity={msg.severity}
+          message={msg.desc}
+          open={open}
+          setOpen={setOpen}
+        />
+      )}
       {/* container start */}
-      <div className="w-full max-w-sm">
-        {isLoading && (
-          <SimpleBackdrop isLoading={isLoading} setIsLoading={setIsLoading} />
-        )}
-        {msg && (
-          <CustomizedSnackbars
-            severity={msg.severity}
-            message={msg.desc}
-            open={open}
-            setOpen={setOpen}
-          />
-        )}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 0.4,
+          scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+        }}
+        className="w-full max-w-sm"
+      >
         <div className="mb-8">
           <Logo />
         </div>
@@ -137,17 +146,17 @@ const AuthLayout = (props) => {
           {type == "sign up" && (
             <>
               <div className="text-center mt-4">
-              <span className="text-sm text-gray-03">
-                Already have an account?&nbsp;
-              </span>
-              <Link to="/login" className="text-primary text-sm font-bold">
-                Sign In Here
-              </Link>
-              <div className="mt-5">
-              <Link to="/forgot" className="text-gray-03 text-sm font-bold">
-                Forgot Password
-              </Link>
-              </div>
+                <span className="text-sm text-gray-03">
+                  Already have an account?&nbsp;
+                </span>
+                <Link to="/login" className="text-primary text-sm font-bold">
+                  Sign In Here
+                </Link>
+                <div className="mt-5">
+                  <Link to="/forgot" className="text-gray-03 text-sm font-bold">
+                    Forgot Password
+                  </Link>
+                </div>
               </div>
             </>
           )}
@@ -166,7 +175,7 @@ const AuthLayout = (props) => {
           {/* )} */}
         </div>
         {/* link end */}
-      </div>
+      </motion.div>
       {/* container end */}
     </div>
   );
