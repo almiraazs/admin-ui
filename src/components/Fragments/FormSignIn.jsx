@@ -39,7 +39,6 @@ const FromSignIn = () => {
       setOpen(true);
       setMsg({ severity: "success", desc: "Login Success" });
 
-      setIsLoading(true);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
       const decoded = jwtDecode(response.data.refreshToken);
@@ -48,7 +47,7 @@ const FromSignIn = () => {
       navigate("/");
     } catch (error) {
       setIsLoading(false);
-      
+
       if (error.response) {
         setOpen(true);
         setMsg({ severity: "error", desc: error.response.data.msg });
@@ -109,14 +108,6 @@ const FromSignIn = () => {
       >
         Login
       </Button>
-      {msg && (
-        <CustomizedSnackbars
-          severity={msg.severity}
-          message={msg.desc}
-          open={open}
-          setOpen={setOpen}
-        />
-      )}
     </form>
   );
 };
