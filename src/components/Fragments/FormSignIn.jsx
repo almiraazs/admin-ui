@@ -4,7 +4,6 @@ import Button from "../Elements/Button";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useContext, useState } from "react";
-import CustomizedSnackbars from "../Elements/SnackBar";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
@@ -39,6 +38,7 @@ const FromSignIn = () => {
       setOpen(true);
       setMsg({ severity: "success", desc: "Login Success" });
 
+      setIsLoggedIn(true);
       localStorage.setItem("refreshToken", response.data.refreshToken);
 
       const decoded = jwtDecode(response.data.refreshToken);
