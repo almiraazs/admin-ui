@@ -3,6 +3,7 @@ import { goals } from "../../../data/goals";
 import Card from "../../Elements/Card";
 import CompositionExample from "../../Elements/GaugeChart";
 import { Icon } from "../../Elements/Icon";
+import axios from "axios";
 
 const CardGoal = () => {
   const [goals, setGoals] = useState({ presentAmount: 0, targetAmount: 0 });
@@ -23,8 +24,8 @@ const CardGoal = () => {
       );
 
       setGoals({
-        presentAmount: response.data.data[0].presentAmount,
-        targetAmount: response.data.data[0].targetAmount,
+        presentAmount: response.data.data[0].present_amount,
+        targetAmount: response.data.data[0].target_amount,
       });
     } catch (error) {
       if (error.response) {
