@@ -5,13 +5,38 @@ import { NotifContext } from "../../context/notifContext";
 import SimpleBackdrop from "../Elements/Backdrop";
 import CustomizedSnackbars from "../Elements/SnackBar";
 import * as motion from "motion/react-client";
+import React from "react";
+import { IoMoon, IoSunny } from "react-icons/io5";
+import { ThemeContext } from "../../context/themeContext";
 
 const AuthLayout = (props) => {
+  const [dark, setDark] = React.useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const darkModeHandler = () => {
+    setDark(!dark);
+    document.body.classList.toggle("dark");
+
+    dark
+      ? setTheme({
+          name: "theme-dark",
+          bgcolor: "bg-[#191919]",
+          color: "#191919",
+        })
+      : setTheme({
+          name: "theme-green",
+          bgcolor: "bg-[#299D91]",
+          color: "#299D91",
+        });
+  };
+
+  console.log(theme);
+
   const { children, type } = props;
   const { msg, setMsg, open, setOpen, isLoading, setIsLoading } =
     useContext(NotifContext);
   return (
-    <div className="flex justify-center min-h-screen items-center bg-special-mainBg">
+    <div className="flex justify-center min-h-screen items-center bg-special-mainBg dark:bg-defaultBlack">
       {isLoading && (
         <SimpleBackdrop isLoading={isLoading} setIsLoading={setIsLoading} />
       )}
@@ -142,7 +167,7 @@ const AuthLayout = (props) => {
         )}
 
         {/* link start */}
-        <div className="flex justify-center">
+        <div className="flex items-center gap-2 flex-col">
           {type == "sign up" && (
             <>
               <div className="text-center mt-4">
@@ -171,7 +196,9 @@ const AuthLayout = (props) => {
               Back to Login
             </Link>
           )}
-
+          <button onClick={darkModeHandler}>
+            {dark ? <IoSunny /> : <IoMoon />}
+          </button>
           {/* )} */}
         </div>
         {/* link end */}

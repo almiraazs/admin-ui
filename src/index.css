@@ -19,6 +19,10 @@ html{
   .theme-blue {
     --color-primary: #1E90FF;
   }
+
+  .theme-dark {
+    --color-primary: #191919;
+  }
   
   .theme-purple {
     --color-primary: #6A5ACD;

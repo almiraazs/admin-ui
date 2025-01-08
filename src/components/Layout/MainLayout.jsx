@@ -6,11 +6,33 @@ import { ThemeContext } from "../../context/themeContext";
 import SimpleBackdrop from "../Elements/Backdrop";
 import CustomizedSnackbars from "../Elements/SnackBar";
 
+
 const MainLayout = (props) => {
   const { children } = props;
   const { msg, setMsg, open, setOpen, isLoading, setIsLoading } =
     useContext(NotifContext);
   const { theme } = useContext(ThemeContext);
+
+  
+  console.log(theme)
+
+  const darkModeHandler = () => {
+    setDark(!dark);
+    document.body.classList.toggle("dark");
+
+    dark
+      ? setTheme({
+          name: "theme-dark",
+          bgcolor: "bg-[#191919]",
+          color: "#191919",
+        })
+      : setTheme({
+          name: "theme-green",
+          bgcolor: "bg-[#299D91]",
+          color: "#299D91",
+        });
+  };
+
 
   return (
     <div
