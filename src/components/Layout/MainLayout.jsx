@@ -36,7 +36,7 @@ const MainLayout = (props) => {
 
   return (
     <div
-      className={`flex bg-special-mainBg w-screen min-h-screen max-w-full ${theme.name}`}
+      className={`flex bg-special-mainBg w-screen min-h-screen max-w-full dark:bg-black`}
     >
       {/* navbar start*/}
       <Navbar />
